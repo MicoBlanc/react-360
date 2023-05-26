@@ -13,12 +13,10 @@ function App() {
               <span className="v360-header-description"></span>
           </div>
           <React360Viewer
-            amount={36}
-            imagePath="https://scaleflex.cloudimg.io/crop/1920x700/n/https://scaleflex.airstore.io/demo/360-car"
-            fileName="iris-{index}.jpeg"
+            amount={11}
+            imagePath="https://ip-public-docs.s3.amazonaws.com/arch-furn-mep"
+            fileName="arch-furn-mep{index}-min.jpg"
             spinReverse
-            autoplay
-            buttonClass="dark"
           />
         </div>
       </div>
