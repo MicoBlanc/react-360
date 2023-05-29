@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Button from './components/Button'
 import './style.css'
 
 import Hammer from 'react-hammerjs';
@@ -425,58 +424,7 @@ class React360Viewer extends Component {
         this.redraw()
     }
 
-    zoomImage = (evt) => {
-        this.setState({ 
-            lastX: evt.offsetX || (evt.pageX - this.canvas.offsetLeft),
-            lastY: evt.offsetY || (evt.pageY - this.canvas.offsetTop)
-        })
-        
-        var delta = evt.wheelDelta ? evt.wheelDelta/40 : evt.deltaY ? -evt.deltaY : 0;
-        
-        if (delta) this.zoom(delta);
-        //return evt.preventDefault() && false;
-            
-    }
-
-    zoomIn = (evt) => {
-        this.setState({ 
-            lastX: this.centerX,
-            lastY: this.centerY
-        })
-        //this.lastY = this.centerY
-        this.zoom(2)
-    }
-    zoomOut = (evt) => {
-        this.setState({ 
-            lastX: this.centerX,
-            lastY: this.centerY
-        })
-        this.zoom(-2)
-    }
-
-    zoom(clicks){
-        //console.log(this.lastX + ' - ' + this.lastY)
-        let factor = Math.pow(1.01,clicks);
-        //console.log(factor)
-        if(factor > 1){
-            this.currentScale += factor
-        }else{
-            if(this.currentScale-factor > 1)
-                this.currentScale -= factor
-            else
-                this.currentScale = 1
-        }
-        
-        if(this.currentScale > 1){
-            let pt = this.ctx.transformedPoint(this.state.lastX,this.state.lastY);
-            this.ctx.translate(pt.x,pt.y);
-            
-            //console.log(this.currentScale)
-            this.ctx.scale(factor,factor);
-            this.ctx.translate(-pt.x,-pt.y);
-            this.redraw();
-        }
-    }
+   
 
     disableZoomin(){
         document.addEventListener("gesturestart", function (e) {
@@ -651,7 +599,7 @@ class React360Viewer extends Component {
         
         return (
             <div>
-                <div className="v360-viewer-container" ref={(inputEl) => {this.viewerContainerRef = inputEl}} id="identifier" onWheel={(e) => this.zoomImage(e)}>
+                <div className="v360-viewer-container" ref={(inputEl) => {this.viewerContainerRef = inputEl}} id="identifier">
 
                     {!this.state.imagesLoaded ? 
                     <div className="v360-viewport">
@@ -673,46 +621,6 @@ class React360Viewer extends Component {
                             {this.props.boxShadow ? <div className="v360-product-box-shadow"></div> : ''}
                         </div>
                     </Hammer>
-
-                    <abbr title="Fullscreen Toggle">
-                        <div className="v360-fullscreen-toggle text-center" onClick={this.toggleFullScreen}>
-                            <div className={this.props.buttonClass === 'dark' ? 'v360-fullscreen-toggle-btn text-light' : 'v360-fullscreen-toggle-btn text-dark'}>
-                                <i className={!this.state.isFullScreen ? 'fas fa-expand text-lg' : 'fas fa-compress text-lg'}></i>
-                            </div>
-                        </div>
-                    </abbr>
-                    
-                    <div id="v360-menu-btns" className={this.props.buttonClass}>
-                        <div className="v360-navigate-btns">
-                            <Button 
-                                clicked={this.togglePlay} 
-                                icon={this.state.playing ? 'fa fa-pause' : 'fa fa-play'} 
-                            />
-                            <Button 
-                                clicked={this.zoomIn} 
-                                icon="fa fa-search-plus" 
-                            />
-                            <Button 
-                                clicked={this.zoomOut} 
-                                icon="fa fa-search-minus" 
-                            />
-
-                            {this.state.panmode ? <Button clicked={this.togglePanMode} text="360&deg;"/> : <Button clicked={this.togglePanMode} icon="fa fa-hand-paper"/>}
-
-                            <Button 
-                                clicked={this.prev} 
-                                icon="fa fa-chevron-left" 
-                            />
-                            <Button 
-                                clicked={this.next} 
-                                icon="fa fa-chevron-right" 
-                            />
-                            <Button 
-                                clicked={this.resetPosition} 
-                                icon="fa fa-sync" 
-                            />
-                        </div>
-                    </div>
                 </div>
             </div>
             

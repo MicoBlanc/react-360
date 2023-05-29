@@ -7,6 +7,12 @@ function App() {
   return (
     <div className="container">
       <div className="row">
+      <React360Viewer
+            amount={11}
+            imagePath="https://ip-public-docs.s3.amazonaws.com/arch-furn-mep"
+            fileName="arch-furn-mep{index}-min.jpg"
+            spinReverse
+          />
         <div className="col-12 mb-4 card p-0">
           <div className="v360-header text-light bg-dark">
               <span className="v360-header-title">36 Images - Autoplay (1 loop) - Reverse Spin</span>
@@ -28,15 +34,15 @@ function App() {
           <p>Features include Zoom, Pan, Autoplay, Loop, Crop, Reverse Spin, Show/Hide Header, and more. <a href="https://github.com/rajeevgade/react-360">Click here for more information.</a> </p>
         </div>
         <div className="col-12 col-md-6 mb-4 card p-0">
-          <div className="v360-header text-light bg-dark">
+          <div className="hidden v360-header text-light bg-dark">
               <span className="v360-header-title">36 Images</span>
               <span className="v360-header-description"></span>
           </div>
           <React360Viewer
-            amount={36}
-            imagePath="https://scaleflex.cloudimg.io/width/600/q35/https://scaleflex.ultrafast.io/https://scaleflex.airstore.io/demo/chair-360-36"
-            fileName="chair_{index}.jpg?v1"
-            buttonClass="dark"
+            amount={11}
+            imagePath="https://ip-public-docs.s3.amazonaws.com/arch-furn-mep"
+            fileName="arch-furn-mep{index}-min.jpg"
+            spinReverse
           />
         </div>
         <div className="col-12 col-md-6 mb-4 card p-0">
